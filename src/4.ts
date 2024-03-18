@@ -1,5 +1,5 @@
 class Key {
-  constructor(private signature: number = Math.random()) {}
+  private signature: number = Math.random();
 
   getSignature(): number {
     return this.signature;
@@ -7,22 +7,19 @@ class Key {
 }
 
 class Person {
-  constructor(private key: Key) {}
-
+  private key: Key;
+  constructor(key: Key) {
+    this.key = key;
+  }
   getKey(): Key {
     return this.key;
   }
 }
 
 abstract class House {
-  protected door = false;
-  protected tenants: Person[] = [];
+  protected door: boolean = false;
   protected key: Key;
-
-  constructor(key: Key) {
-    this.key = key;
-  }
-
+  protected tenants: Person[] = [];
   abstract openDoor(key: Key): void;
 
   comeIn(person: Person): void {
@@ -47,7 +44,7 @@ class MyHouse extends House {
 }
 
 const key = new Key();
-const house = new MyHouse(key);
+const house = new MyHouse();
 const person = new Person(key);
 
 house.openDoor(person.getKey());
